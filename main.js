@@ -86,13 +86,10 @@ const main = async () => {
             soundFilenames.push(`${soundName}${i}.ogg`);
         }
     }
-    console.log(soundFilenames);
     const soundBuffers = await Promise.all(soundFilenames.map(async filename => {
         const data = await fetch(filename).then(response => response.arrayBuffer());
-        console.log(data);
         return new Promise((resolve, reject) => audioContext.decodeAudioData(data, resolve, reject));
     }));
-    console.log(soundBuffers);
 
     window.setInterval(() => {
         addKity(kitties);
